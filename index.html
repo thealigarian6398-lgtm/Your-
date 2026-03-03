@@ -1,80 +1,77 @@
-<<!-- Romantic Music + Hearts Animation -->
-<audio id="bgmusic" autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
-<style>
-  .heart {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
-    transform: rotate(45deg);
-    animation: float 4s linear infinite;
-  }
-  .heart:after, .heart:before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
-    border-radius: 50%;
-  }
-  .heart:before { top: -10px; left: 0; }
-  .heart:after { left: 10px; top: 0; }
-
-  @keyframes float {
-    0% { transform: translateY(0) rotate(45deg); opacity:1; }
-    100% { transform: translateY(-500px) rotate(45deg); opacity:0; }
-  }
-</style>
-
-<script>
-  // Add floating hearts every 0.3s
-  setInterval(() => {
-    let heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.background = 'red';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-  }, 300);
-
-  // Auto play music
-  let music = document.getElementById('bgmusic');
-  music.volume = 0.3;
-  music.play();
-</script>!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Just For You 🤍</title>
+  <title>Still Yours 💌</title>
   <style>
-    body { margin:0; padding:0; background:#141e30; color:white; font-family:Arial; text-align:center; }
-    .box { margin-top:120px; }
-    button { padding:12px 25px; font-size:16px; border:none; border-radius:25px; background:#ff4d6d; color:white; cursor:pointer; }
-    button:hover { background:#ff1e4d; }
+    body { margin:0; padding:0; background: linear-gradient(to right, #1e1e2f, #2b2b45); color:white; font-family: Arial, sans-serif; text-align:center; overflow-x:hidden;}
+    .box { margin-top:80px; }
+    button { padding:12px 25px; font-size:16px; border:none; border-radius:25px; background-color:#ff4d6d; color:white; cursor:pointer; margin-top:20px;}
+    button:hover { background-color:#ff1e4d;}
     .hidden { display:none; margin-top:30px; font-size:20px; }
+    .heart { position:absolute; width:20px; height:20px; background:red; transform:rotate(45deg); animation: float 4s linear infinite;}
+    .heart:after, .heart:before { content:""; position:absolute; width:20px; height:20px; background:red; border-radius:50%; }
+    .heart:before { top:-10px; left:0; }
+    .heart:after { left:10px; top:0; }
+    @keyframes float { 0%{ transform: translateY(0) rotate(45deg); opacity:1;} 100%{ transform: translateY(-500px) rotate(45deg); opacity:0; } }
   </style>
 </head>
 <body>
 
-<div class="box">
-  <h1>Open Only If You Miss Me 😌</h1>
-  <button onclick="showMessage()">Tap Here</button>
-  <div class="hidden" id="message">
-    <p>Happy Birthday 🤍</p>
+<div class="box" id="quiz">
+  <h1>Tap to start your surprise 😌</h1>
+  <button onclick="nextQuestion()">Start</button>
+  <div id="question" class="hidden">
+    <p id="qtext"></p>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <div id="final" class="hidden">
+    <h2>Happy Birthday 🤍</h2>
     <p>No matter what happens… I am always with you.</p>
-    <p>Still yours. Always yours. ✨</p>
+    <p>Still yours. Always yours ✨</p>
   </div>
 </div>
 
+<audio id="bgmusic" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function showMessage() {
-  document.getElementById("message").style.display = "block";
+let questions = [
+  "Guess who is sending you a surprise? 😌",
+  "How much do you miss me right now? 💖",
+  "Are you ready for a big hug in your heart? ✨"
+];
+let index = 0;
+
+function nextQuestion() {
+  let qDiv = document.getElementById('question');
+  let fDiv = document.getElementById('final');
+  let qText = document.getElementById('qtext');
+  if(index < questions.length){
+    qDiv.style.display='block';
+    qText.innerText = questions[index];
+    index++;
+  } else {
+    qDiv.style.display='none';
+    fDiv.style.display='block';
+  }
 }
+
+// Floating hearts
+setInterval(()=>{
+  let heart = document.createElement('div');
+  heart.className='heart';
+  heart.style.left = Math.random()*window.innerWidth+'px';
+  heart.style.background='red';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},300);
+
+// Music autoplay
+let music = document.getElementById('bgmusic');
+music.volume=0.3;
+music.play();
 </script>
 
 </body>
 </html>
-<!-- updated: adding hearts snippet -->
-  
